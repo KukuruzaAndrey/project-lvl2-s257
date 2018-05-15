@@ -31,7 +31,8 @@
   "homepage": "https://github.com/KukuruzaAndrey/project-lvl2-s257#readme",
   "dependencies": {
     "commander": "^2.15.1",
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.10",
+    "js-yaml": "^3.11.0"
   },
   "devDependencies": {
     "babel": "^6.23.0",
