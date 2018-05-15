@@ -1,0 +1,8 @@
+{
+  "updateChannel": "stable",
+  "fontSize": 16,
+  "fontFamily": "\"Source Code Variable\", \"Iosevka Term\"",
+  "cursorBlink": false,
+  "foregroundColor": "#BADA55",
+  "backgroundColor": "#FFFFFF"
+}
