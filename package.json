@@ -1,0 +1,25 @@
+{
+  "name": "gendiff257",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KukuruzaAndrey/project-lvl2-s257.git"
+  },
+  "keywords": [
+    "hexlet"
+  ],
+  "author": "Andrey Kukuruza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KukuruzaAndrey/project-lvl2-s257/issues"
+  },
+  "homepage": "https://github.com/KukuruzaAndrey/project-lvl2-s257#readme",
+  "dependencies": {
+    "commander": "^2.15.1"
+  }
+}
