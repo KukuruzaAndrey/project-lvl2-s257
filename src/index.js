@@ -9,19 +9,19 @@ const genDiff = (path1, path2) => {
   const obj1 = parse(readFileSync(path1, 'utf-8'));
   const obj2 = parse(readFileSync(path2, 'utf-8'));
   const keys = _.union(Object.keys(obj1), Object.keys(obj2));
-  const body = keys.reduce((acc, key) => {
+  const body = keys.map((key) => {
     if (!_.has(obj1, key)) {
-      return [...acc, `+ ${key}: ${obj2[key]}`];
+      return `+ ${key}: ${obj2[key]}`;
     } else if (!_.has(obj2, key)) {
-      return [...acc, `- ${key}: ${obj1[key]}`];
+      return `- ${key}: ${obj1[key]}`;
     } else if (obj1[key] === obj2[key]) {
-      return [...acc, `  ${key}: ${obj1[key]}`];
+      return `  ${key}: ${obj1[key]}`;
     } else if (obj1[key] !== obj2[key]) {
-      return [...acc, `- ${key}: ${obj1[key]}`, `+ ${key}: ${obj2[key]}`];
+      return [`- ${key}: ${obj1[key]}`, `+ ${key}: ${obj2[key]}`];
     }
     return [];
-  }, []);
-  return `{\n    ${body.join('\n    ')}\n}`;
+  });
+  return `{\n    ${_.flatten(body).join('\n    ')}\n}`;
 };
 
 export default genDiff;
