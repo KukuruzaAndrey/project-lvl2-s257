@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import program from 'commander';
-import genDiff from '..'
+import genDiff from '..';
+
 program
   .version('1.0.0')
   .arguments('<firstConfig> <secondConfig>')
