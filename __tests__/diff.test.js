@@ -2,15 +2,16 @@ import fs from 'fs';
 import path from 'path';
 import genDiff from '../src';
 
-test('simple json', () => {
-  const diff = genDiff(path.resolve(__dirname, '__fixtures__/simple/before.json'), path.resolve(__dirname, '__fixtures__/simple/after.json'));
-  const result = fs.readFileSync(path.resolve(__dirname, '__fixtures__/simple/expectedResult'), 'utf-8');
+const diffTest = (before, after, expectedResult) => {
+  const diff = genDiff(path.resolve(__dirname, before), path.resolve(__dirname, after));
+  const result = fs.readFileSync(path.resolve(__dirname, expectedResult), 'utf-8');
   expect(diff).toBe(result);
+};
+
+test('simple json', () => {
+  diffTest('__fixtures__/simple/before.json', '__fixtures__/simple/after.json', '__fixtures__/simple/expectedResult');
 });
 
 test('simple yaml', () => {
-  const diff = genDiff(path.resolve(__dirname, '__fixtures__/simple/before.yaml'), path.resolve(__dirname, '__fixtures__/simple/after.yaml'));
-  const result = fs.readFileSync(path.resolve(__dirname, '__fixtures__/simple/expectedResult'), 'utf-8');
-  expect(diff).toBe(result);
+  diffTest('__fixtures__/simple/before.yaml', '__fixtures__/simple/after.yaml', '__fixtures__/simple/expectedResult');
 });
-
