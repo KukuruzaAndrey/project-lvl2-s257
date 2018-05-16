@@ -12,3 +12,5 @@ const diffTest = (before, after, expectedResult) => {
 test('simple json', () => diffTest('before.json', 'after.json', 'expectedResult'));
 
 test('simple yaml', () => diffTest('before.yaml', 'after.yaml', 'expectedResult'));
+
+test('simple ini', () => diffTest('before.ini', 'after.ini', 'expectedResult'));
