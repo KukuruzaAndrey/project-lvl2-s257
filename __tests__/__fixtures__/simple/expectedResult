@@ -1,12 +1,12 @@
 {
-    - updateChannel: canary
-    + updateChannel: stable
-      fontSize: 16
-    - fontFamily: "Source Code Variable", "Iosevka Term", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace
-    + fontFamily: "Source Code Variable", "Iosevka Term"
-    - cursorColor: rgba(255,255,0,0.8)
-    - cursorShape: BLOCK
-      cursorBlink: false
-    + foregroundColor: #BADA55
-    + backgroundColor: #FFFFFF
+  - updateChannel: canary
+  + updateChannel: stable
+    fontSize: 16
+  - fontFamily: "Source Code Variable", "Iosevka Term", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace
+  + fontFamily: "Source Code Variable", "Iosevka Term"
+  - cursorColor: rgba(255,255,0,0.8)
+  - cursorShape: BLOCK
+    cursorBlink: false
+  + foregroundColor: #BADA55
+  + backgroundColor: #FFFFFF
 }
