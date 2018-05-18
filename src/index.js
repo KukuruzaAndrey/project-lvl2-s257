@@ -63,7 +63,8 @@ const genDiff = (path1, path2) => {
       if (!_.isObject(obj)) {
         return obj;
       }
-      return `{\n${Object.keys(obj).map(key => `${'    '.repeat(depth + 2)}${key}: ${obj[key]}`).join('\n')}\n${'    '.repeat(depth + 1)}}`;
+      const body = Object.keys(obj).map(key => `${'    '.repeat(depth + 2)}${key}: ${obj[key]}\n`).join('');
+      return `{\n${body}${'    '.repeat(depth + 1)}}`;
     };
     const statusMap = {
       added: '+',
@@ -82,7 +83,6 @@ const genDiff = (path1, path2) => {
     const body = ast.reduce((acc, node) => iter(acc, node, 0), []);
     return `{\n${body.join('')}}`;
   };
-  console.log(JSON.stringify(diffAST(obj1, obj2)));
   return render(diffAST(obj1, obj2));
 };
 

@@ -16,3 +16,7 @@ test('simple yaml', () => diffTest('simple/before.yaml', 'simple/after.yaml', 's
 test('simple ini', () => diffTest('simple/before.ini', 'simple/after.ini', 'simple/expectedResult'));
 
 test('nested json', () => diffTest('nested/before.json', 'nested/after.json', 'nested/expectedResult'));
+
+test('nested yaml', () => diffTest('nested/before.yaml', 'nested/after.yaml', 'nested/expectedResult'));
+
+test('nested ini', () => diffTest('nested/before.ini', 'nested/after.ini', 'nested/expectedResult'));
