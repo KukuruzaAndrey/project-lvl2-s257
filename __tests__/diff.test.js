@@ -9,14 +9,20 @@ const diffTest = (before, after, expectedResult) => {
   expect(diff).toBe(result);
 };
 
-test('simple json', () => diffTest('simple/before.json', 'simple/after.json', 'simple/expectedResult'));
+test('standart simple json', () => diffTest('simple/before.json', 'simple/after.json', 'simple/standartExpectedResult'));
 
-test('simple yaml', () => diffTest('simple/before.yaml', 'simple/after.yaml', 'simple/expectedResult'));
+test('standart simple yaml', () => diffTest('simple/before.yaml', 'simple/after.yaml', 'simple/standartExpectedResult'));
 
-test('simple ini', () => diffTest('simple/before.ini', 'simple/after.ini', 'simple/expectedResult'));
+test('standart simple ini', () => diffTest('simple/before.ini', 'simple/after.ini', 'simple/standartExpectedResult'));
 
-test('nested json', () => diffTest('nested/before.json', 'nested/after.json', 'nested/expectedResult'));
+test('standart nested json', () => diffTest('nested/before.json', 'nested/after.json', 'nested/standartExpectedResult'));
 
-test('nested yaml', () => diffTest('nested/before.yaml', 'nested/after.yaml', 'nested/expectedResult'));
+test('standart nested yaml', () => diffTest('nested/before.yaml', 'nested/after.yaml', 'nested/standartExpectedResult'));
 
-test('nested ini', () => diffTest('nested/before.ini', 'nested/after.ini', 'nested/expectedResult'));
+test('standart nested ini', () => diffTest('nested/before.ini', 'nested/after.ini', 'nested/standartExpectedResult'));
+
+// test('plain nested json', () => diffTest('nested/before.json', 'nested/after.json', 'nested/plainExpectedResult'));
+//
+// test('plain nested yaml', () => diffTest('nested/before.yaml', 'nested/after.yaml', 'nested/plainExpectedResult'));
+//
+// test('plain nested ini', () => diffTest('nested/before.ini', 'nested/after.ini', 'nested/plainExpectedResult'));
