@@ -1,4 +1,10 @@
 import standardRender from './standardRender';
 import plainRender from './plainRender';
 
-export { standardRender, plainRender };
+export default (type) => {
+  const typeMap = {
+    standard: standardRender,
+    plain: plainRender,
+  };
+  return typeMap[type];
+};
