@@ -32,3 +32,13 @@ test('plain nested json', () => diffTest('nested/before.json', 'nested/after.jso
 test('plain nested yaml', () => diffTest('nested/before.yaml', 'nested/after.yaml', 'nested/plainExpectedResult', 'plain'));
 
 test('plain nested ini', () => diffTest('nested/before.ini', 'nested/after.ini', 'nested/plainExpectedResult', 'plain'));
+
+test('json simple json', () => diffTest('simple/before.json', 'simple/after.json', 'simple/jsonExpectedResult', 'json'));
+
+test('json simple yaml', () => diffTest('simple/before.yaml', 'simple/after.yaml', 'simple/jsonExpectedResult', 'json'));
+
+test('json nested json', () => diffTest('nested/before.json', 'nested/after.json', 'nested/jsonExpectedResult', 'json'));
+
+test('json nested yaml', () => diffTest('nested/before.yaml', 'nested/after.yaml', 'nested/jsonExpectedResult', 'json'));
+
+test('json nested ini', () => diffTest('nested/before.ini', 'nested/after.ini', 'nested/jsonExpectedResult', 'json'));
