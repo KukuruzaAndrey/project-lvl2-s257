@@ -8,7 +8,7 @@ const plainRender = (ast) => {
     return `value: ${typeof value === 'string' ? `'${value}'` : value}`;
   };
   const render = {
-    nested: ({ name, value }, parents, func) => value.reduce((nAcc, n) => func(nAcc, n, [...parents, name]), []).filter(v => v).join('\n'),
+    nested: ({ name, children }, parents, func) => children.reduce((nAcc, n) => func(nAcc, n, [...parents, name]), []).filter(v => v).join('\n'),
     added: ({ name, value }, parents) => `Property '${[...parents, name].join('.')}' was added with ${stringify(value)}`,
     removed: ({ name }, parents) => `Property '${[...parents, name].join('.')}' was removed`,
     unchanged: () => null,

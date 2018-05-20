@@ -2,7 +2,7 @@ import path from 'path';
 import { readFileSync } from 'fs';
 import _ from 'lodash';
 import getParser from './parser';
-import getRender from './render';
+import getRender from './renderers';
 
 const genDiff = (path1, path2, renderType = 'standard') => {
   const ext = path.extname(path1);
@@ -13,37 +13,36 @@ const genDiff = (path1, path2, renderType = 'standard') => {
     {
       type: 'nested',
       check: (before, after, key) => _.isObject(before[key]) && _.isObject(after[key]),
-      action: (before, after, func) => func(before, after),
+      action: (before, after, func) => ({ children: func(before, after) }),
     },
     {
       type: 'added',
       check: (before, after, key) => !_.has(before, key),
-      action: (before, after) => after,
+      action: (before, after) => ({ value: after }),
     },
     {
       type: 'removed',
       check: (before, after, key) => !_.has(after, key),
-      action: before => before,
+      action: before => ({ value: before }),
     },
     {
       type: 'unchanged',
       check: (before, after, key) => before[key] === after[key],
-      action: (before, after) => after,
+      action: (before, after) => ({ value: after }),
     },
     {
       type: 'updated',
       check: (before, after, key) => before[key] !== after[key],
-      action: (before, after) => ({ before, after }),
+      action: (before, after) => ({ value: { before, after } }),
     },
   ];
   const buildAST = (before, after) => {
     const keys = _.union(_.keys(before), _.keys(after));
-    const ast = keys.map((key) => {
+    return keys.map((key) => {
       const { type, action } = _.find(keyTypes, item => item.check(before, after, key));
-      const value = action(before[key], after[key], buildAST);
-      return { name: key, type, value };
+      const partTree = action(before[key], after[key], buildAST);
+      return { name: key, type, ...partTree };
     });
-    return ast;
   };
   const render = getRender(renderType);
   return render(buildAST(obj1, obj2));

@@ -9,7 +9,7 @@ const StandardRender = (ast) => {
     return `{\n${body}${'    '.repeat(depth + 1)}}`;
   };
   const render = {
-    nested: ({ name, value }, depth, func) => [`${'    '.repeat(depth)}  ${name}: {\n`, ...value.reduce((nAcc, n) => func(nAcc, n, depth + 1), []), `${'    '.repeat(depth + 1)}}`].join(''),
+    nested: ({ name, children }, depth, func) => [`${'    '.repeat(depth)}  ${name}: {\n`, ...children.reduce((nAcc, n) => func(nAcc, n, depth + 1), []), `${'    '.repeat(depth + 1)}}`].join(''),
     added: ({ name, value }, depth) => `${'    '.repeat(depth)}+ ${name}: ${stringify(value, depth)}`,
     removed: ({ name, value }, depth) => `${'    '.repeat(depth)}- ${name}: ${stringify(value, depth)}`,
     unchanged: ({ name, value }, depth) => `${'    '.repeat(depth)}  ${name}: ${stringify(value, depth)}`,
