@@ -1,0 +1,6 @@
+Property 'updateChannel' was updated. From value: 'canary' to value: 'stable'
+Property 'fontFamily' was updated. From value: '"Source Code Variable", "Iosevka Term", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace' to value: '"Source Code Variable", "Iosevka Term"'
+Property 'cursorColor' was removed
+Property 'cursorShape' was removed
+Property 'foregroundColor' was added with value: '#BADA55'
+Property 'backgroundColor' was added with value: '#FFFFFF'

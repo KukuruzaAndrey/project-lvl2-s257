@@ -1,23 +1,26 @@
 import _ from 'lodash';
 
 const plainRender = (ast) => {
-  const stringify = obj => `${!_.isObject(obj) ? 'complex value' : `value: ${JSON.stringify(obj)}`}`;
-  const statusMap = {
-    added: ({ name, value }, parents) => `Property '${[...parents, name].join('.')}' was added with ${stringify(value)}\n`,
-    removed: ({ name }, parents) => `Property '${[...parents, name].join('.')}' was removed\n`,
-    unchanged: () => '',
-    updated: ({ name, valueBefore, valueAfter }, parents) => `Property '${[...parents, name].join('.')}' was updated. From ${stringify(valueBefore)} to ${stringify(valueAfter)}\n`,
+  const stringify = (value) => {
+    if (_.isObject(value)) {
+      return 'complex value';
+    }
+    return `value: ${typeof value === 'string' ? `'${value}'` : value}`;
+  };
+  const render = {
+    nested: ({ name, value }, parents, func) => value.reduce((nAcc, n) => func(nAcc, n, [...parents, name]), []).filter(v => v).join('\n'),
+    added: ({ name, value }, parents) => `Property '${[...parents, name].join('.')}' was added with ${stringify(value)}`,
+    removed: ({ name }, parents) => `Property '${[...parents, name].join('.')}' was removed`,
+    unchanged: () => null,
+    updated: ({ name, value: { before, after } }, parents) =>
+      `Property '${[...parents, name].join('.')}' was updated. From ${stringify(before)} to ${stringify(after)}`,
   };
   const iter = (acc, node, parents) => {
-    const {
-      name, status, children,
-    } = node;
-    if (children === undefined) {
-      return [...acc, statusMap[status](node, parents)];
-    }
-    return [...acc, ...children.reduce((nAcc, n) => iter(nAcc, n, [...parents, name]), [])];
+    const { type } = node;
+    return [...acc, render[type](node, parents, iter)];
   };
-  const body = ast.reduce((acc, node) => iter(acc, node, []), []);
-  return body.join('');
+  const body = ast.reduce((acc, node) => iter(acc, node, []), []).filter(v => v);
+  return body.join('\n');
 };
+
 export default plainRender;
