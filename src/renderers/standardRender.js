@@ -5,7 +5,7 @@ const stringify = (obj, depth) => {
     return obj;
   }
   const body = Object.keys(obj).map(key => `${'    '.repeat(depth + 2)}${key}: ${obj[key]}`);
-  return ['{', body, `${'    '.repeat(depth + 1)}}`].join('\n');
+  return ['{', ...body, `${'    '.repeat(depth + 1)}}`].join('\n');
 };
 
 const StandardRender = (ast) => {
@@ -18,11 +18,9 @@ const StandardRender = (ast) => {
   };
   const iter = (node, depth) => {
     const { type } = node;
-    const stringsWithSpace = render[type](node, depth, iter).map(str => `  ${'    '.repeat(depth)}${str}`);
-    console.log(stringsWithSpace);
-    return stringsWithSpace;
+    return render[type](node, depth, iter).map(str => `  ${'    '.repeat(depth)}${str}`);
   };
-  const body = ast.map(node => iter(node, 0));
-  return ['{', ...(_.flatten(body)), '}'].join('\n');
+  const body = _.flatten(ast.map(node => iter(node, 0)));
+  return ['{', ...body, '}'].join('\n');
 };
 export default StandardRender;
