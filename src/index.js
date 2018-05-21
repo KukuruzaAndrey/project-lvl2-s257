@@ -33,7 +33,7 @@ const genDiff = (path1, path2, renderType = 'standard') => {
     {
       type: 'updated',
       check: (before, after, key) => before[key] !== after[key],
-      action: (before, after) => ({ value: { before, after } }),
+      action: (before, after) => ({ valueBefore: before, valueAfter: after }),
     },
   ];
   const buildAST = (before, after) => {
