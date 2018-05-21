@@ -10,17 +10,13 @@ const stringify = (obj, depth) => {
 
 const StandardRender = (ast) => {
   const render = {
-    nested: ({ name, children }, depth, func) => [`  ${name}: {\n${_.flatten(children.map(n => func(n, depth + 1))).join('\n')}`, '  }'],
-    added: ({ name, value }, depth) => [`+ ${name}: ${stringify(value, depth)}`],
-    removed: ({ name, value }, depth) => [`- ${name}: ${stringify(value, depth)}`],
-    unchanged: ({ name, value }, depth) => [`  ${name}: ${stringify(value, depth)}`],
-    updated: ({ name, valueBefore, valueAfter }, depth) => [`- ${name}: ${stringify(valueBefore, depth)}`, `+ ${name}: ${stringify(valueAfter, depth)}`],
+    nested: ({ name, children }, depth) => [`${'    '.repeat(depth)}    ${name}: {`, ...children.map(n => render[n.type](n, depth + 1)), `${'    '.repeat(depth)}    }`],
+    added: ({ name, value }, depth) => `${'    '.repeat(depth)}  + ${name}: ${stringify(value, depth)}`,
+    removed: ({ name, value }, depth) => `${'    '.repeat(depth)}  - ${name}: ${stringify(value, depth)}`,
+    unchanged: ({ name, value }, depth) => `${'    '.repeat(depth)}    ${name}: ${stringify(value, depth)}`,
+    updated: ({ name, valueBefore, valueAfter }, depth) => [`${'    '.repeat(depth)}  - ${name}: ${stringify(valueBefore, depth)}`, `${'    '.repeat(depth)}  + ${name}: ${stringify(valueAfter, depth)}`],
   };
-  const iter = (node, depth) => {
-    const { type } = node;
-    return render[type](node, depth, iter).map(str => `  ${'    '.repeat(depth)}${str}`);
-  };
-  const body = _.flatten(ast.map(node => iter(node, 0)));
+  const body = _.flattenDeep(ast.map(node => render[node.type](node, 0)));
   return ['{', ...body, '}'].join('\n');
 };
 export default StandardRender;
